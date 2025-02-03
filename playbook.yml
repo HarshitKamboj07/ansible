@@ -1,0 +1,7 @@
+- name: Basic Playbook
+  hosts: localhost
+  tasks:
+    - name: Install a package
+      apt:
+        name: <package_name>
+        state: present
