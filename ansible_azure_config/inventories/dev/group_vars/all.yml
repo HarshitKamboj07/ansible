@@ -1,41 +1,20 @@
 ---
-# Environment identification
-env_name: development
-env_type: dev
+# Global variables for all hosts in development
+environment: development
 azure_region: eastus2
-
-# Global settings
 ansible_connection_timeout: 60
+
+# Development specific settings
 debug_mode: true
 log_level: debug
 
-# Azure settings
-azure_settings:
-  resource_group: "rg-{{ env_type }}-{{ azure_region }}"
-  tags:
-    Environment: "{{ env_name }}"
-    ManagedBy: "Ansible"
-
-# Common packages
 common_packages:
   - vim
   - wget
   - curl
   - git
-  - telnet
+  - telnet # Additional tools for development environment
 
-# Monitoring
-monitoring:
-  enabled: true
-  log_retention_days: 30
-  debug_logging: true
-  alert_email: "dev-team@example.com"
-
-# Network
-network:
-  dns_servers:
-    - "10.1.0.4"
-    - "10.1.0.5"
-  ntp_servers:
-    - "pool.ntp.org"
-    - "time.windows.com"
+# Development specific timeouts
+connection_timeout: 120
+operation_timeout: 180
