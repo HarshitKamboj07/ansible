@@ -1,0 +1,51 @@
+---
+- name: Check if Notepad++ is already installed
+  win_stat:
+    path: "{{ notepad_plus_plus.creates_path }}"
+  register: npp_install_status
+  tags:
+    - notepad++
+    - check
+
+- name: Create temporary directory
+  win_file:
+    path: "{{ temp_dir }}"
+    state: directory
+  when: not npp_install_status.stat.exists
+  tags:
+    - notepad++
+    - install
+
+- name: Download Notepad++ installer
+  win_get_url:
+    url: "{{ notepad_plus_plus.url }}"
+    dest: "{{ notepad_plus_plus.install_path }}"
+  when: not npp_install_status.stat.exists
+  register: download_result
+  retries: 3
+  delay: 5
+  until: download_result is success
+  tags:
+    - notepad++
+    - install
+
+- name: Install Notepad++
+  win_package:
+    path: "{{ notepad_plus_plus.install_path }}"
+    arguments: "{{ notepad_plus_plus.install_args }}"
+    state: "{{ notepad_plus_plus.state }}"
+    creates_path: "{{ notepad_plus_plus.creates_path }}"
+  register: install_result
+  when: not npp_install_status.stat.exists
+  tags:
+    - notepad++
+    - install
+
+- name: Remove installer
+  win_file:
+    path: "{{ notepad_plus_plus.install_path }}"
+    state: absent
+  when: not npp_install_status.stat.exists and install_result.changed
+  tags:
+    - notepad++
+    - cleanup

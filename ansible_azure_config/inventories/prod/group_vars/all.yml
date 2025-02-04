@@ -1,0 +1,39 @@
+---
+# Environment identification
+env_name: production
+env_type: prod
+azure_region: eastus
+
+# Global settings
+ansible_connection_timeout: 30
+debug_mode: false
+log_level: info
+
+# Azure settings
+azure_settings:
+  resource_group: "rg-{{ env_type }}-{{ azure_region }}"
+  tags:
+    Environment: "{{ env_name }}"
+    ManagedBy: "Ansible"
+
+# Common packages
+common_packages:
+  - vim
+  - wget
+  - curl
+
+# Monitoring
+monitoring:
+  enabled: true
+  log_retention_days: 90
+  debug_logging: false
+  alert_email: "prod-team@example.com"
+
+# Network
+network:
+  dns_servers:
+    - "10.0.0.4"
+    - "10.0.0.5"
+  ntp_servers:
+    - "pool.ntp.org"
+    - "time.windows.com"

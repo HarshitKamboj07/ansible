@@ -1,0 +1,24 @@
+---
+# WinRM configuration
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+ansible_port: 5986
+ansible_winrm_transport: basic
+ansible_winrm_scheme: https
+ansible_winrm_operation_timeout_sec: 60
+ansible_winrm_read_timeout_sec: 70
+
+# Paths
+temp_dir: C:\Temp
+log_dir: C:\Logs
+
+# Windows Update settings
+win_updates_category:
+  - SecurityUpdates
+  - CriticalUpdates
+
+# Monitoring
+windows_monitoring:
+  enable_performance_counters: true
+  enable_event_logging: true
+  log_retention_days: 90

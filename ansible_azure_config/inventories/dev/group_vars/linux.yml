@@ -1,0 +1,28 @@
+---
+# SSH configuration
+ansible_connection: ssh
+ansible_user: azureuser
+
+# Paths
+temp_dir: /tmp
+log_dir: /var/log
+
+# System settings
+linux_system:
+  enable_selinux: false
+  enable_firewall: true
+  enable_automatic_updates: true
+
+# Monitoring
+linux_monitoring:
+  enable_sysstat: true
+  enable_auditd: true
+  log_retention_days: 30
+
+# Security
+linux_security:
+  ssh_port: 22
+  disable_root_login: false
+  allowed_users:
+    - azureuser
+    - developer

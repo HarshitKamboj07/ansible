@@ -1,0 +1,17 @@
+plugin: azure_rm
+auth_source: auto
+include_vm_resource_groups:
+  - rg-dev-{{ azure_region }}
+default_groups:
+  - azure_dev_vms
+keyed_groups:
+  - prefix: azure
+    key: resource_group
+  - prefix: azure_location
+    key: location
+  - prefix: azure_tags
+    key: tags
+  - prefix: azure_os
+    key: os_profile.system
+filters:
+  - tags.Environment == "development"

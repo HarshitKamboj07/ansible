@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: collections/requirements.yml
+driver:
+  name: azure
+platforms:
+  - name: instance
+    resource_group: molecule-test
+    vm_size: Standard_DS1_v2
+    image:
+      offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2019-Datacenter
+      version: latest
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+  playbooks:
+    converge: converge.yml
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint

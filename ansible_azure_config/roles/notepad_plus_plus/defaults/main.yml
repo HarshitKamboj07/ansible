@@ -1,0 +1,9 @@
+---
+notepad_plus_plus:
+  version: "8.5.4"
+  architecture: "x64"
+  install_path: "{{ temp_dir }}\\npp_installer.exe"
+  url: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v{{ notepad_plus_plus.version }}/npp.{{ notepad_plus_plus.version }}.Installer.{{ notepad_plus_plus.architecture }}.exe"
+  install_args: "/S"
+  state: present
+  creates_path: "C:\\Program Files\\Notepad++\\notepad++.exe"

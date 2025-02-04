@@ -1,0 +1,49 @@
+# Ansible
+*.retry
+*.pyc
+__pycache__/
+.cache/
+.ansible/
+.molecule/
+.pytest_cache/
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+
+# Credentials
+credentials/*.yml
+!credentials/*.example.yml
+.vault_pass.txt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temp files
+*.tmp
+.tmp/
+.temp/
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# Build
+dist/
+build/
+*.egg-info/
